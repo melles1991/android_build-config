@@ -8,7 +8,6 @@ task:
   tags:
     - exodus-task
   variables:
-
   script:
     - |
       mkdir exodusos
