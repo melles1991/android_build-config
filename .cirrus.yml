@@ -10,14 +10,13 @@ task:
   variables:
   script:
     - |
-      mkdir exodusos
+      mkdir /exodusos/
       cd /exodusos/
       git remote set-url origin https://github.com/lineageos-infra/build-config.git
       git clean -ffxdq
       git fetch -v --prune -- origin main
       git checkout -f FETCH_HEAD
       git clean -ffxdq
-      trap 'kill -- $$' INT TERM QUIT; curl https://raw.githubusercontent.com/ExodusOS/hudson/master/lineage-build-targets | python android/generator.py | buildkite-agent pipeline upload
   only:
     - triggers
     - web  
