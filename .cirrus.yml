@@ -7,10 +7,9 @@ task:
   stage: task
   tags:
     - exodus-task
-  variables:
   script:
     - |
-      mkdir /exodusos/
+      mkdir -p /exodusos
       cd /exodusos/
       git remote set-url origin https://github.com/lineageos-infra/build-config.git
       git clean -ffxdq
