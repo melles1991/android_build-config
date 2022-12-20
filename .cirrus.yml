@@ -14,7 +14,7 @@ task:
   name: exodus-build
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   container:
-      image: registry.gitlab.com/sushrut1101/docker:latest
+      image: apon77/aosp:cirrus
       cpu: 4
       memory: 16G
   env_script:
