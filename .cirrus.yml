@@ -9,7 +9,7 @@ env:
     CIRRUS_SHELL: bash
 
 task:
-  name: exodus-sync
+  name: exodus-build
   only_if: $CIRRUS_REPO_OWNER == 'ExodusOS'
   timeout_in: 60m
   container:
@@ -20,16 +20,5 @@ task:
     - env
   Sync_script:
       - bash sync.sh
-    
-task:
-  name: chidori-build
-  only_if: $CIRRUS_REPO_OWNER == 'ExodusOS'
-  depends_on:
-    - exodus-sync
-  timeout_in: 23h
-  container:
-    image: stupidkidaf/kernel_docker:v1
-    cpu: 4
-    memory: 16G
   Build_script:
       - bash build.sh
