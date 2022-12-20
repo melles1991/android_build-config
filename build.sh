@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to the Source Directory
-cd $SYNC_PATH
+cd $SYNC_PATH/exodus
 # Set-up ccache
 if [ -z "$CCACHE_SIZE" ]; then
     ccache -M 10G
