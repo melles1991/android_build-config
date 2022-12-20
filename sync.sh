@@ -15,7 +15,6 @@ txtbld=$(tput bold)
 txtrst=$(tput sgr0) 
 
 export DATE=$(date '+%Y-%m-%d  %H:%M')
-export HOME_DIR="exodus"
 
 # Telegram setup
 push_message() {
@@ -29,12 +28,21 @@ push_message() {
 
 push_message "<b>Build ExodusOS bot is running.</b>
 <b>Date:</b> <code>$DATE</code>"
-cd $HOME && sudo apt-get install git -y && git clone https://github.com/CraftRom/scripts && cd scripts && sudo bash setup/android_build_env.sh
+# Make the Directory if it doesn't exist
+mkdir -p $SYNC_PATH
+
+# Change to the Source Directory
+cd $SYNC_PATH
+
+# Init
+sudo su
+apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+mkdir -p ~/.bin
+PATH="${HOME}/.bin:${PATH}"
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+chmod a+rx ~/.bin/repo
+
 echo -e "$blue    \nDownloading manifest and initialized repo.\n $nocol"
 push_message "Downloading manifest and initialized repo"
-cd $HOME
-mkdir -p $HOME_DIR
-cd $HOME/$HOME_DIR/
-ls
-repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1
-repo sync --detach --no-tags --force-remove-dirty --force-sync
+repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH
+repo sync --detach --no-tags --force-remove-dirty --force-sync -j8
