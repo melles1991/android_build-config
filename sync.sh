@@ -21,7 +21,7 @@ export HOME_DIR="exodus"
 push_message() {
     curl -s -X POST \
          https://api.telegram.org/bot5579959772:AAHJ1cvfipl05kxYhNQBvLy7b60vGmeQSRE/sendMessage \
-        -d chat_id="-1001695676652" \
+        -d chat_id="-1001593139005" \
         -d text="$1" \
         -d "parse_mode=html" \
         -d "disable_web_page_preview=true"
