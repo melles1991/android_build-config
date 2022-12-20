@@ -15,8 +15,8 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   container:
       image: registry.gitlab.com/sushrut1101/docker:latest
-      cpu: 8
-      memory: 32G
+      cpu: 4
+      memory: 16G
   env_script:
     - env
   Sync_script:
