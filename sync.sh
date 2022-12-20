@@ -46,4 +46,4 @@ echo -e "$blue    \nDownloading manifest and initialized repo.\n $nocol"
 push_message "Downloading manifest and initialized repo"
 ls
 repo init -u $MANIFEST -b $MANIFEST_BRANCH
-repo sync --detach --no-tags --force-remove-dirty --force-sync -j8
+repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-remove-dirty --force-sync
