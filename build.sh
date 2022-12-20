@@ -1,17 +1,25 @@
 #!/bin/bash
+# Change to the Source Directory
+cd $SYNC_PATH
+# Set-up ccache
+if [ -z "$CCACHE_SIZE" ]; then
+    ccache -M 10G
+else
+    ccache -M ${CCACHE_SIZE}
+fi
+
 SECONDS=0 # builtin bash timer
 echo "--- Setup"
-cd $HOME/$HOME_DIR
 
 export OVERRIDE_TARGET_FLATTEN_APEX=true
 
 export TYPE=userdebug
 export DEVICE_START=onclite 
-export LOGBUILD="/tmp/android-build-${DEVICE_START}.log"
+export LOGBUILD="tmp/android-build-${DEVICE_START}.log"
 
 echo "--- Clean"
-rm $HOME/$HOME_DIR/tmp/android-*.log || true
-rm $HOME/$HOME_DIR/out/target/product/$DEVICE_START/ExodusOS-*.zip || true
+rm tmp/android-*.log || true
+rm out/target/product/$DEVICE_START/ExodusOS-*.zip || true
 
 # Telegram setup
 push_message() {
@@ -37,12 +45,13 @@ echo "--- Building"
 . build/envsetup.sh
 mka cleaninstall
 breakfast lineage_$DEVICE_START-$TYPE
-export OVERRIDE_TARGET_FLATTEN_APEX=true
+
 export BUILD_DATE=$(date '+%Y-%m-%d  %H:%M')
+
 # Push message if build started
 push_message "<b>Start building ExodusOS for <code>$DEVICE_START</code></b>
 <b>BuildDate:</b> <code>$BUILD_DATE</code>"
-brunch $DEVICE_START | tee $LOGBUILD
+brunch $DEVICE_START -j8 | tee $LOGBUILD
 
 rom="out/target/product/$DEVICE_START/ExodusOS-*.zip"
 if [ -f "$rom" ]; then
