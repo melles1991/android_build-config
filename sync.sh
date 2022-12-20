@@ -45,6 +45,8 @@ chmod a+rx ~/.bin/repo
 echo -e "$blue    \nDownloading manifest and initialized repo.\n $nocol"
 push_message "Downloading manifest and initialized repo"
 echo -e "$blue    \n initialized repo.\n $nocol"
+mkdir -p $SYNC_PATH/exodus
+cd $SYNC_PATH/exodus
 repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH
 echo -e "$blue    \n end initialized repo.\n $nocol"
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-remove-dirty --force-sync
