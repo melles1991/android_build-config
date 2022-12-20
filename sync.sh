@@ -34,6 +34,6 @@ echo -e "$blue    \nDownloading manifest and initialized repo.\n $nocol"
 push_message "Downloading manifest and initialized repo"
 cd $HOME
 mkdir -p $HOME_DIR
-cd $HOME/$HOME_DIR
+cd $HOME/$HOME_DIR/
 repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1
-repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync
+repo sync --detach --no-tags --force-remove-dirty --force-sync
