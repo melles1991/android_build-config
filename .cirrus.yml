@@ -10,7 +10,6 @@ env:
     
 task:
   name: "exodus-build"
-  timeout_in: 1440m
   container:
     image: registry.gitlab.com/sushrut1101/docker:latest
     cpu: 8
