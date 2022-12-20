@@ -10,7 +10,7 @@ env:
 
 task:
   name: exodus-build
-  only_if: $CIRRUS_REPO_OWNER == 'ExodusOS'
+  only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 60m
   container:
     image: stupidkidaf/kernel_docker:v1
