@@ -19,7 +19,7 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 6h
   container:
-      image: ghcr.io/sushrut1101/docker:arch
+      image: ghcr.io/sushrut1101/docker:latest
       cpu: 8
       memory: 32G
 
@@ -27,7 +27,6 @@ task:
     - env
     
   Build-Env-Setup_script:
-    - pacman -S apt
     - apt update
     - apt install sudo
     - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
