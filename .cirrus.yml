@@ -16,8 +16,8 @@ task:
   timeout_in: 4h
   container:
     image: apon77/aosp:cirrus
-    cpu: 24
-    memory: 120G
+    cpu: 8
+    memory: 32G
     volumes:
         - /home/cirrus/exodus:/home/cirrus/exodus
         - /home/cirrus/ccache:/home/cirrus/ccache
