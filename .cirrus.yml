@@ -1,5 +1,5 @@
 env:
-    MANIFEST: https://github.com/ExodusOS/android.git
+    MANIFEST: https://github.com/LineageOS/android.git
     MANIFEST_BRANCH: lineage-19.1
     # Not Recommended to Change
     
