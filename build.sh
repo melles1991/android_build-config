@@ -14,12 +14,11 @@ echo "--- Setup"
 export OVERRIDE_TARGET_FLATTEN_APEX=true
 
 export TYPE=userdebug
-export DEVICE_START=onclite 
-export LOGBUILD="tmp/android-build-${DEVICE_START}.log"
+export LOGBUILD="tmp/android-build-${DEVICE}.log"
 
 echo "--- Clean"
 rm tmp/android-*.log || true
-rm out/target/product/$DEVICE_START/ExodusOS-*.zip || true
+rm out/target/product/$DEVICE/ExodusOS-*.zip || true
 
 # Telegram setup
 push_message() {
@@ -44,36 +43,36 @@ push_document() {
 echo "--- Building"
 . build/envsetup.sh
 mka cleaninstall
-breakfast lineage_$DEVICE_START-$TYPE
+breakfast lineage_$DEVICE-$TYPE
 
 export BUILD_DATE=$(date '+%Y-%m-%d  %H:%M')
 
 # Push message if build started
-push_message "<b>Start building ExodusOS for <code>$DEVICE_START</code></b>
+push_message "<b>Start building ExodusOS for <code>$DEVICE</code></b>
 <b>BuildDate:</b> <code>$BUILD_DATE</code>"
-brunch $DEVICE_START -j8 | tee $LOGBUILD
+brunch $DEVICE -j8 | tee $LOGBUILD
 
-rom="out/target/product/$DEVICE_START/ExodusOS-*.zip"
+rom="out/target/product/$DEVICE/ExodusOS-*.zip"
 if [ -f "$rom" ]; then
 	echo -e "$blue --- Uploading *.zip. $nocol"
-	scp out/target/product/$DEVICE_START/ExodusOS-*.zip melles1991@frs.sourceforge.net:/home/frs/project/exodusos/ExodusOS/onclite/$DEVICE_START/squirrel
+	scp out/target/product/$DEVICE/ExodusOS-*.zip melles1991@frs.sourceforge.net:/home/frs/project/exodusos/ExodusOS/onclite/$DEVICE/squirrel
 
 	# Push to telegram
-	push_message "ExodusOS for <code>$DEVICE_START</code>
+	push_message "ExodusOS for <code>$DEVICE</code>
 	<b>Type:</b> <code>$TYPE</code>
 	<b>BuildDate:</b> <code>$BUILD_DATE</code>
 	<b>md5 checksum :</b> <code>$(md5sum "$rom" | cut -d' ' -f1)</code>"
 
 	push_document "$LOGBUILD" "
-	<b>ExodusOS for <code>$DEVICE_START</code> compiled succesfully!</b>
+	<b>ExodusOS for <code>$DEVICE</code> compiled succesfully!</b>
 	Total build time <b>$((SECONDS / 60))</b> minute(s) and <b>$((SECONDS % 60))</b> second(s) !
-	#logs #$DEVICE_START "
+	#logs #$DEVICE "
 	echo -e "(i)          Send to telegram succesfully!\n"
 else
 	echo -e "$red \Rom Compilation failed! Fix the errors!\n $nocol"
 	# Push message if build error
-	push_message "$BUILDER! <b>Failed building ExodusOS for <code>$DEVICE_START</code></b> 
+	push_message "$BUILDER! <b>Failed building ExodusOS for <code>$DEVICE</code></b> 
 	<b>Please fix it...!</b>
 	Total build time <b>$((SECONDS / 60))</b> minute(s) and <b>$((SECONDS % 60))</b> second(s) !"
-	push_document "$LOGBUILD" "#$DEVICE_START #error #exodus "
+	push_document "$LOGBUILD" "#$DEVICE #error #exodus "
 fi

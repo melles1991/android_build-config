@@ -45,7 +45,8 @@ push_message "Downloading manifest and initialized repo"
 echo -e "$blue    \n initialized repo.\n $nocol"
 mkdir -p $SYNC_PATH/exodus
 cd $SYNC_PATH/exodus
-repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH
+repo init -u $MANIFEST -b $MANIFEST_BRANCH
+git clone $LOCAL_MANIFEST --depth 1 -b $LOCAL_BRANCH .repo/local_manifests
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-remove-dirty --force-sync
 
 echo -e "$blue    \n end initialized repo.\n $nocol"

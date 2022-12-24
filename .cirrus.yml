@@ -1,6 +1,9 @@
 env:
     MANIFEST: https://github.com/LineageOS/android.git
     MANIFEST_BRANCH: lineage-19.1
+    LOCAL_MANIFEST: https://github.com/melles1991/exodus_manifest.git
+    LOCAL_BRANCH : lineage-19.1
+    DEVICE: onclite
     # Not Recommended to Change
     
     SYNC_PATH: $HOME/work # Do NOT use "~". Use $HOME instead.
