@@ -31,8 +31,7 @@ task:
     - mkdir -p ~/exodus/$branch
     - cd ~/exodus/$branch
     - rm -rf .repo/local_manifests
-    - command=repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1
-    - bash -c "$command" || true
+    - bash -c repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1 || true
 
     - set -exv
     - curl -sO https://api.cirrus-ci.com/v1/task/$CIRRUS_TASK_ID/logs/sync.log
