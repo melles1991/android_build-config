@@ -27,7 +27,10 @@ task:
     - env
     
   Build-Env-Setup_script:
-    - export DEBIAN_FRONTEND=noninteractive
+    - pacman -S pacaur
+    - pacaur -S apt
+    - apt update
+    - apt install sudo
     - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
     - ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
     - apt-get install -y tzdata
