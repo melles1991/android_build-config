@@ -19,11 +19,12 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 6h
   container:
-    image: golang:latest
+    image: crystallang/crystal:0.36.1-alpine
+    cpu: 8
     additional_containers:
-      - name: azurite
-        image: mcr.microsoft.com/azure-storage/azurite
-        port: 10000
+      - name: postgresql
+        image: postgres:12-alpine
+        port: 5432
 
   env_script:
     - env
