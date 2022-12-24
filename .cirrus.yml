@@ -12,7 +12,6 @@ env:
 
 task:
   name: Build
-  skip: $CIRRUS_BRANCH == 'main'
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 4h
   persistent_worker:
