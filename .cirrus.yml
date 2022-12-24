@@ -19,7 +19,7 @@ task:
     image: apon77/aosp:cirrus
     cpu: 8
     memory: 32G
-    
+
   env_script:
     - env
     
