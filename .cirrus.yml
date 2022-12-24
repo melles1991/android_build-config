@@ -31,7 +31,7 @@ task:
     - mkdir -p $HOME/exodus/$branch
     - cd $HOME/exodus/$branch
     - rm -rf .repo/local_manifests
-    - repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1 || true
+    - repo init --depth=1 -u https://github.com/ExodusOS/android.git -b lineage-19.1 || true
     - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
 
 
@@ -42,7 +42,7 @@ task:
     - export CCACHE_DIR=$CCACHE_DIR
     - export CCACHE_EXEC=$(which ccache)
     - export USE_CCACHE=1
-    - ccache -M 8G
+    - ccache -M $CCACHE_SIZE
     - ccache -z
     - . build/envsetup.sh
     - mka cleaninstall
