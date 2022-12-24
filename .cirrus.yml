@@ -26,11 +26,9 @@ task:
     cpu: 2.4
     memory: 10Gb
     additional_containers:
-      - name: postgres
-        # 9.5 is the version used internally at SonarSource.
-        # The minimal supported version is 9.3 and is tested by nightly QA jobs.
-        image: postgres:9.5
-        port: 5432
+      - name: mssql
+        image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+        port: 1433
 
   env_script:
     - env
