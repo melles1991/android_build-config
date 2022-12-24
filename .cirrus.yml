@@ -31,10 +31,9 @@ task:
     - mkdir -p ~/exodus/$branch
     - cd ~/exodus/$branch
     - rm -rf .repo/local_manifests
-    - bash -c repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1 || true
+    - repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1 || true
     - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
 
-    - rm -rf sync.log
 
   build_script:
     - set -e
