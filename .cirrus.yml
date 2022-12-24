@@ -27,8 +27,7 @@ task:
     - env
     
   Build-Env-Setup_script:
-    - pacman -S pacaur
-    - pacaur -S apt
+    - pacman -S apt
     - apt update
     - apt install sudo
     - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
