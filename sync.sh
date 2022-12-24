@@ -42,6 +42,15 @@ push_message "Downloading manifest and initialized repo"
 echo -e "$blue    \n initialized repo.\n $nocol"
 mkdir -p $SYNC_PATH/exodus
 cd $SYNC_PATH/exodus
-repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1
-echo -e "$blue    \n end initialized repo.\n $nocol"
+# Init
+sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+mkdir -p ~/.bin
+PATH="${HOME}/.bin:${PATH}"
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+chmod a+rx ~/.bin/repo
+repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-remove-dirty --force-sync
+
+echo -e "$blue    \n end initialized repo.\n $nocol"
+# Exit
+exit 0

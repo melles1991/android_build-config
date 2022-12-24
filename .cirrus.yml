@@ -2,10 +2,11 @@ env:
     MANIFEST: https://github.com/ExodusOS/android.git
     MANIFEST_BRANCH: lineage-19.1
     # Not Recommended to Change
+    
+    SYNC_PATH: $HOME/work # Do NOT use "~". Use $HOME instead.
     CCACHE_SIZE: 30G
-    CCACHE_DIR: $HOME/ccache/exodus/$device
+    CCACHE_DIR: $HOME/work/.ccache
     J_VAL: 16
-    DEVICE: onclite
     
     # Cirrus Specific Vars (Do *NOT* Change)
     CIRRUS_SHELL: bash
@@ -13,38 +14,15 @@ env:
 task:
   name: Build
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
-  timeout_in: 4h
+  timeout_in: 6h
   container:
     image: apon77/aosp:cirrus
     cpu: 8
     memory: 32G
-    volumes:
-        - /home/cirrus/exodus:/home/cirrus/exodus
-        - /home/cirrus/ccache:/home/cirrus/ccache
-        - /home/cirrus/.config:/home/cirrus/.config
-
-  init_script:
-    - cd $HOME && sudo apt-get install git -y && git clone https://github.com/CraftRom/scripts && cd scripts && sudo bash setup/android_build_env.sh
-  sync_script:
-    - set -e
-    - branch=squirrel
-    - mkdir -p $HOME/exodus/$branch
-    - cd $HOME/exodus/$branch
-    - rm -rf .repo/local_manifests
-    - bash repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH || true
-    - bash repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
-
-
-  build_script:
-    - set -e
-    - branch=squirrel
-    - cd ~/exodus/$branch
-    - export CCACHE_DIR=$CCACHE_DIR
-    - export CCACHE_EXEC=$(which ccache)
-    - export USE_CCACHE=1
-    - ccache -M $CCACHE_SIZE
-    - ccache -z
-    - . build/envsetup.sh
-    - mka cleaninstall
-    - breakfast lineage_$DEVICE_START-$TYPE
+  env_script:
+    - env
+  Sync_script:
+    - bash sync.sh
+  Build_script:
+    - bash build.sh
     
