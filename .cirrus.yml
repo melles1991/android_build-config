@@ -31,8 +31,8 @@ task:
     - mkdir -p $HOME/exodus/$branch
     - cd $HOME/exodus/$branch
     - rm -rf .repo/local_manifests
-    - repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH || true
-    - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
+    - bash repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH || true
+    - bash repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
 
 
   build_script:
