@@ -19,9 +19,11 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 6h
   container:
-    image: apon77/aosp:cirrus
-    cpu: 8
-    memory: 32G
+    image: golang:latest
+    additional_containers:
+      - name: azurite
+        image: mcr.microsoft.com/azure-storage/azurite
+        port: 10000
 
   env_script:
     - env
