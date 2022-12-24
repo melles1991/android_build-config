@@ -19,7 +19,7 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 6h
   container:
-      image: ghcr.io/sushrut1101/docker:fedora
+      image: ghcr.io/sushrut1101/docker:arch
       cpu: 8
       memory: 32G
 
