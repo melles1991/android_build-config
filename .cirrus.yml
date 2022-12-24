@@ -28,8 +28,8 @@ task:
   sync_script:
     - set -e
     - branch=squirrel
-    - mkdir -p ~/exodus/$branch
-    - cd ~/exodus/$branch
+    - mkdir -p $HOME/exodus/$branch
+    - cd $HOME/exodus/$branch
     - rm -rf .repo/local_manifests
     - repo init -u https://github.com/ExodusOS/android.git -b lineage-19.1 || true
     - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
