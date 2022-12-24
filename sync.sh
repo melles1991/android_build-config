@@ -32,8 +32,11 @@ push_message "<b>Build ExodusOS bot is running.</b>
 mkdir -p $SYNC_PATH
 
 # Init
-cd $HOME && sudo apt-get install git -y && git clone https://github.com/CraftRom/scripts && cd scripts && sudo bash setup/android_build_env.sh
-
+sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+mkdir -p ~/.bin
+PATH="${HOME}/.bin:${PATH}"
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+chmod a+rx ~/.bin/repo
 # Change to the Source Directory
 cd $SYNC_PATH
 
@@ -42,12 +45,6 @@ push_message "Downloading manifest and initialized repo"
 echo -e "$blue    \n initialized repo.\n $nocol"
 mkdir -p $SYNC_PATH/exodus
 cd $SYNC_PATH/exodus
-# Init
-sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
-mkdir -p ~/.bin
-PATH="${HOME}/.bin:${PATH}"
-curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
-chmod a+rx ~/.bin/repo
 repo init --depth=1 -u $MANIFEST -b $MANIFEST_BRANCH
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-remove-dirty --force-sync
 
