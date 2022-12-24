@@ -19,11 +19,17 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'melles1991'
   timeout_in: 6h
   container:
-    image: crystallang/crystal:0.36.1-alpine
-    cpu: 4
+    image: gcr.io/ci-cd-215716/sonar-enterprise-build:0.0.3
+    cluster_name: cirrus-euw3a-cluster
+    zone: europe-west3-a
+    namespace: default
+    cpu: 2.4
+    memory: 10Gb
     additional_containers:
-      - name: postgresql
-        image: postgres:12-alpine
+      - name: postgres
+        # 9.5 is the version used internally at SonarSource.
+        # The minimal supported version is 9.3 and is tested by nightly QA jobs.
+        image: postgres:9.5
         port: 5432
 
   env_script:
